@@ -9,12 +9,20 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {LoginScreen} from './src/screens/LoginScreen';
 import {HomeScreen} from './src/screens/HomeScreen';
 import {StatementScreen} from './src/screens/StatementScreen';
 import {TransactionDetailScreen} from './src/screens/TransactionDetailScreen';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const HomeTabs = () => (
+  <Tab.Navigator>
+    <Tab.Screen name={'HomeScreen'} component={HomeScreen} />
+  </Tab.Navigator>
+);
 
 const App: () => React$Node = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,7 +32,7 @@ const App: () => React$Node = () => {
       <Stack.Navigator>
         {loggedIn ? (
           <>
-            <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
+            <Stack.Screen name={'HomeTabs'} component={HomeTabs} />
             <Stack.Screen
               name={'StatementScreen'}
               component={StatementScreen}
