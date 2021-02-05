@@ -19,7 +19,7 @@ export const HomeScreen = (props) => {
       <Expander>
         <Content>
           <Header>
-            <Container style={{flexDirection: 'row'}}>
+            <Container style={{flexDirection: 'row', paddingHorizontal: 16}}>
               <Text
                 style={{
                   fontFamily: 'Montserrat-Bold',
@@ -34,7 +34,11 @@ export const HomeScreen = (props) => {
               />
               <IC_Vector width={12} height={7} style={{top: 8, left: 8}} />
             </Container>
-            <IC_Notification width={24} height={24} />
+            <IC_Notification
+              width={24}
+              height={24}
+              style={{marginHorizontal: 16}}
+            />
           </Header>
           <BalanceContainer>
             <Text style={{fontSize: 14, lineHeight: 20, marginBottom: 10}}>
@@ -63,8 +67,7 @@ export const HomeScreen = (props) => {
 const Content = styled.ScrollView`
   flex: 1;
   width: ${width};
-  padding-vertical: 20px;
-  padding-horizontal: 16px;
+  padding-top: 20px;
 `;
 
 const Header = styled.SafeAreaView`

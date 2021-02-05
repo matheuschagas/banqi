@@ -45,7 +45,7 @@ export const QuickAccess = (props) => {
     <FlatList
       showsHorizontalScrollIndicator={false}
       horizontal
-      style={{marginTop: 40, marginBottom: 27, paddingTop: 10}}
+      style={{marginTop: 40, marginBottom: 27, paddingTop: 10, paddingLeft: 10}}
       data={data}
       keyExtractor={(item) => item.testID}
       renderItem={({item}) => {
