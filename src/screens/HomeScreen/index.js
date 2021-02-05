@@ -8,15 +8,24 @@ import IC_Notification from '../../assets/Icons/ic_notification-active.svg';
 import IC_Vector from '../../assets/Icons/Vector 1.svg';
 import IC_Eye from '../../assets/Icons/eye-outline.svg';
 import IC_Hand_Money from '../../assets/Icons/ic_hand_money.svg';
-import {Dimensions} from 'react-native';
+import {Dimensions, FlatList} from 'react-native';
 import {UserService} from '../../services/UserService';
 const {width, height} = Dimensions.get('window');
 import numeral from 'numeral';
 import {QuickAccess} from '../../components/QuickAccess';
+import {TransactionItem} from '../../components/TransactionItem';
+import {TransactionsService} from '../../services/TransactionsService';
+import {TransactionSeparator} from '../../components/TransactionSeparator';
 
 export const HomeScreen = (props) => {
   const [recentTransactions, setRecentTransactions] = useState([]);
-  useEffect(() => {}, []);
+  const getRecentTransactions = async () => {
+    let transactions = await TransactionsService.getRecent(3);
+    setRecentTransactions(transactions);
+  };
+  useEffect(() => {
+    getRecentTransactions();
+  }, []);
   return (
     <Expander>
       <Expander>
@@ -54,7 +63,9 @@ export const HomeScreen = (props) => {
                   fontFamily: 'Montserrat-Bold',
                   lineHeight: 28,
                 }}>
-                {numeral(parseInt(UserService.user.balance)).format('$ 0,0.00')}
+                {numeral(parseFloat(UserService.user.balance)).format(
+                  '$ 0,0.00',
+                )}
               </Text>
               <IC_Eye width={24} height={24} style={{top: 2, left: 15}} />
             </Container>
@@ -86,6 +97,15 @@ export const HomeScreen = (props) => {
             <Text style={{fontSize: 14, lineHeight: 20}}>
               Histórico de transações
             </Text>
+            <FlatList
+              style={{marginTop: 20}}
+              data={recentTransactions}
+              keyExtractor={(item) => item._id}
+              renderItem={({item, index}) => {
+                return <TransactionItem {...item} />;
+              }}
+              ItemSeparatorComponent={TransactionSeparator}
+            />
           </TransactionHistorySection>
         </Content>
       </Expander>

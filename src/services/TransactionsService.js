@@ -8,10 +8,12 @@ export class TransactionsService {
     TransactionsService.transactions = transactions;
     const orderedTransactions = TransactionsService.transactions.sort(
       (a, b) => {
-        return new Date(b) - new Date(a);
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB.getTime() - dateA.getTime();
       },
     );
-    return orderedTransactions.slice(0, qty - 1);
+    return orderedTransactions.slice(0, qty);
   }
 
   static async get({startDate, endDate}) {
@@ -20,7 +22,9 @@ export class TransactionsService {
 
     //sort transactions
     let filteredTransactions = TransactionsService.transactions.sort((a, b) => {
-      return new Date(b) - new Date(a);
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA - dateB;
     });
     if (startDate && endDate) {
       filteredTransactions = filteredTransactions.filter((item) => {
