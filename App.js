@@ -17,7 +17,7 @@ import {TransactionDetailScreen} from './src/screens/TransactionDetailScreen';
 import {DeviceEventEmitter, ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import {COLOR_01} from '@env';
-
+import numeral from 'numeral';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -50,11 +50,28 @@ const App: () => React$Node = () => {
     DeviceEventEmitter.addListener('logout', logout);
     DeviceEventEmitter.addListener('loaderOn', loaderOn);
     DeviceEventEmitter.addListener('loaderOff', loaderOff);
+    numeral.register('locale', 'pt-br', {
+      delimiters: {
+        thousands: '.',
+        decimal: ',',
+      },
+      abbreviations: {
+        thousand: 'k',
+        million: 'm',
+        billion: 'b',
+        trillion: 't',
+      },
+      currency: {
+        symbol: 'R$',
+      },
+    });
+    numeral.locale('pt-br');
     return () => {
       DeviceEventEmitter.removeListener('login', login);
       DeviceEventEmitter.removeListener('logout', logout);
       DeviceEventEmitter.removeListener('loaderOn', loaderOn);
       DeviceEventEmitter.removeListener('loaderOff', loaderOff);
+      delete numeral.locales['pt-br'];
     };
   }, []);
 
