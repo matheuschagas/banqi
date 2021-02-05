@@ -27,8 +27,8 @@ const ButtonContainer = styled.TouchableOpacity`
 `;
 const ButtonContent = styled.Text`
   font-size: 14px;
-  font-weight: 700;
   text-transform: uppercase;
   text-align: center;
   color: ${COLOR_07};
+  font-family: Montserrat-Bold;
 `;

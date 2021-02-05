@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {COLOR_05, COLOR_02, COLOR_07} from '@env';
+import {COLOR_05, COLOR_02, COLOR_07, COLOR_09} from '@env';
 import IC_HOME from '../assets/Icons/ic_home.svg';
 import IC_CARNES from '../assets/Icons/ic_carnes.svg';
 import IC_CARDS from '../assets/Icons/ic_cards.svg';
@@ -15,49 +15,65 @@ export const TabBar = (props) => {
   const carnes = props.active === 'Carnês';
   return (
     <Container>
-      <Clickable activeOpacity={0.7}>
-        <IC_HOME width={25} height={25} stroke={inicio ? COLOR_05 : COLOR_02} />
-        <ClickableText active={inicio}>Início</ClickableText>
-      </Clickable>
-      <Clickable activeOpacity={0.7}>
-        <IC_MARKETPLACE
-          width={25}
-          height={25}
-          stroke={compras ? COLOR_05 : COLOR_02}
-        />
-        <ClickableText active={compras}>Compras</ClickableText>
-      </Clickable>
-      <Clickable activeOpacity={0.7}>
-        <IC_SCANNER
-          width={25}
-          height={25}
-          stroke={pagar ? COLOR_05 : COLOR_02}
-        />
-        <ClickableText active={pagar}>Pagar</ClickableText>
-      </Clickable>
-      <Clickable activeOpacity={0.7}>
-        <IC_CARDS
-          width={25}
-          height={25}
-          stroke={cartoes ? COLOR_05 : COLOR_02}
-        />
-        <ClickableText active={cartoes}>Cartões</ClickableText>
-      </Clickable>
-      <Clickable activeOpacity={0.7}>
-        <IC_CARNES
-          width={25}
-          height={25}
-          stroke={carnes ? COLOR_05 : COLOR_02}
-        />
-        <ClickableText active={carnes}>Carnês</ClickableText>
-      </Clickable>
+      <BorderTop />
+      <ButtonsContainer>
+        <Clickable activeOpacity={0.7}>
+          <IC_HOME
+            width={25}
+            height={25}
+            stroke={inicio ? COLOR_05 : COLOR_02}
+          />
+          <ClickableText active={inicio}>Início</ClickableText>
+        </Clickable>
+        <Clickable activeOpacity={0.7}>
+          <IC_MARKETPLACE
+            width={25}
+            height={25}
+            stroke={compras ? COLOR_05 : COLOR_02}
+          />
+          <ClickableText active={compras}>Compras</ClickableText>
+        </Clickable>
+        <Clickable activeOpacity={0.7}>
+          <IC_SCANNER
+            width={25}
+            height={25}
+            stroke={pagar ? COLOR_05 : COLOR_02}
+          />
+          <ClickableText active={pagar}>Pagar</ClickableText>
+        </Clickable>
+        <Clickable activeOpacity={0.7}>
+          <IC_CARDS
+            width={25}
+            height={25}
+            stroke={cartoes ? COLOR_05 : COLOR_02}
+          />
+          <ClickableText active={cartoes}>Cartões</ClickableText>
+        </Clickable>
+        <Clickable activeOpacity={0.7}>
+          <IC_CARNES
+            width={25}
+            height={25}
+            stroke={carnes ? COLOR_05 : COLOR_02}
+          />
+          <ClickableText active={carnes}>Carnês</ClickableText>
+        </Clickable>
+      </ButtonsContainer>
     </Container>
   );
 };
 
 const Container = styled.SafeAreaView`
-  flex-direction: row;
   background-color: ${COLOR_07};
+  width: 100%;
+`;
+const ButtonsContainer = styled.View`
+  flex-direction: row;
+`;
+
+const BorderTop = styled.View`
+  width: 100%;
+  height: 1px;
+  background-color: ${COLOR_09};
 `;
 const Clickable = styled.TouchableOpacity`
   flex: 1;
@@ -70,4 +86,5 @@ const ClickableText = styled.Text`
   font-size: 11px;
   text-align: center;
   color: ${(props) => (props.active ? COLOR_05 : COLOR_02)};
+  font-family: Montserrat-Medium;
 `;
