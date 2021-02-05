@@ -7,7 +7,7 @@ export const Button = (props) => {
     <ButtonContainer
       onPress={props.onPress}
       style={{...props.style}}
-      activeOpacity={0.8}>
+      activeOpacity={0.7}>
       <ButtonContent style={{...props.contentStyle}}>
         {props.children}
       </ButtonContent>
