@@ -3,7 +3,7 @@ import {TabBar} from '../../components/TabBar';
 import {Expander} from '../../components/Expander';
 import styled from 'styled-components/native';
 import {Text} from '../../components/Text';
-import {COLOR_05, COLOR_07, COLOR_03} from '@env';
+import {COLOR_05, COLOR_07, COLOR_03, COLOR_04} from '@env';
 import IC_Notification from '../../assets/Icons/ic_notification-active.svg';
 import IC_Vector from '../../assets/Icons/Vector 1.svg';
 import IC_Eye from '../../assets/Icons/eye-outline.svg';
@@ -16,42 +16,28 @@ import {QuickAccess} from '../../components/QuickAccess';
 import {TransactionItem} from '../../components/TransactionItem';
 import {TransactionsService} from '../../services/TransactionsService';
 import {TransactionSeparator} from '../../components/TransactionSeparator';
+import {useNavigation} from '@react-navigation/core';
+import {Header} from '../../components/Header';
 
 export const HomeScreen = (props) => {
+  const {navigate} = useNavigation();
   const [recentTransactions, setRecentTransactions] = useState([]);
   const getRecentTransactions = async () => {
     let transactions = await TransactionsService.getRecent(3);
     setRecentTransactions(transactions);
   };
+  const openTransactions = () => {
+    navigate('StatementScreen');
+  };
+
   useEffect(() => {
     getRecentTransactions();
   }, []);
   return (
     <Expander>
       <Expander>
-        <Content>
-          <Header>
-            <Container style={{flexDirection: 'row', paddingHorizontal: 16}}>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Bold',
-                  color: COLOR_05,
-                  fontSize: 16,
-                }}>
-                meu
-              </Text>
-              <Logo
-                source={require('../../assets/Images/Logo/Logo.png')}
-                resizeMode={'contain'}
-              />
-              <IC_Vector width={12} height={7} style={{top: 8, left: 8}} />
-            </Container>
-            <IC_Notification
-              width={24}
-              height={24}
-              style={{marginHorizontal: 16}}
-            />
-          </Header>
+        <Content showsVerticalScrollIndicator={false}>
+          <Header />
           <BalanceContainer>
             <Text style={{fontSize: 14, lineHeight: 20, marginBottom: 10}}>
               Meu saldo:
@@ -106,6 +92,19 @@ export const HomeScreen = (props) => {
               }}
               ItemSeparatorComponent={TransactionSeparator}
             />
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 16,
+                color: COLOR_04,
+                fontFamily: 'Montserrat-Bold',
+                paddingVertical: 10,
+                textAlign: 'right',
+                marginTop: 20,
+              }}
+              onPress={openTransactions}>
+              VER MAIS
+            </Text>
           </TransactionHistorySection>
         </Content>
       </Expander>
@@ -118,19 +117,6 @@ const Content = styled.ScrollView`
   flex: 1;
   width: ${width};
   padding-top: 20px;
-`;
-
-const Header = styled.SafeAreaView`
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Logo = styled.Image`
-  width: 63px;
-  height: 18px;
-  margin-left: 3px;
 `;
 
 const Container = styled.View``;

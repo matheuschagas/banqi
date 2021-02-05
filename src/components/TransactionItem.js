@@ -4,14 +4,20 @@ import IC_Arrow from '../assets/Icons/Vector.svg';
 import {Text} from './Text';
 import numeral from 'numeral';
 import {COLOR_03, COLOR_06} from '@env';
+import {useNavigation} from '@react-navigation/core';
 
 export const TransactionItem = (props) => {
+  const {navigate} = useNavigation();
   let {_id, description, amount, date} = props;
   amount = parseFloat(amount);
   date = new Date(date);
   const positive = amount > 0;
+
+  const openTransaction = () => {
+    navigate('TransactionDetailScreen', {...props});
+  };
   return (
-    <Container key={_id} activeOpacity={0.7}>
+    <Container key={_id} activeOpacity={0.7} onPress={openTransaction}>
       <IC_Arrow />
       <InfoContainer>
         <Text style={{fontSize: 14, lineHeight: 20}}>{description}</Text>

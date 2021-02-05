@@ -24,7 +24,7 @@ export class TransactionsService {
     let filteredTransactions = TransactionsService.transactions.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
-      return dateA - dateB;
+      return dateB.getTime() - dateA.getTime();
     });
     if (startDate && endDate) {
       filteredTransactions = filteredTransactions.filter((item) => {
