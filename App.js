@@ -29,7 +29,7 @@ const App: () => React$Node = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode={'none'}>
         {loggedIn ? (
           <>
             <Stack.Screen name={'HomeTabs'} component={HomeTabs} />
