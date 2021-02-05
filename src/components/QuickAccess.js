@@ -71,7 +71,7 @@ const QuickAccessCard = styled.TouchableOpacity`
   width: 120px;
   align-items: flex-start;
   background: ${COLOR_07};
-  border-radius: 11px;
+  border-radius: 4px;
   margin-horizontal: 5px;
   margin-vertical: 5px;
   shadowColor: #000;
